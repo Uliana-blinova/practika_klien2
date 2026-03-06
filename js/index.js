@@ -53,9 +53,9 @@ Vue.component('cards', {
                             @change="$emit('update-progress', card)"
                             :disabled="disabled"
                         >
-                        <span :class="{ 'text-done': item.done }">
+                        <div :class="{ 'text-done': item.done }">
                             {{ item.text }}
-                        </span>
+                        </div>
                     </label>
                 </li>
             </ul>
@@ -76,15 +76,15 @@ Vue.component('colum', {
     },
     template: `
     <div class="column" :class="{ blocked: isBlocked }">
-            <h2>{{ title }} <span v-if="limit">({{ cards.length }}/{{ limit }})</span></h2>
+            <h2>{{ title }} <div v-if="limit">({{ cards.length }}/{{ limit }})</div></h2>
             <div class="cards-container">
-                <note-card 
+                <div
                     v-for="card in cards" 
                     :key="card.id" 
                     :card="card"
                     :disabled="isBlocked"
-                    @update-progress="hanUpdate"
-                />
+                    @update-progress="hanUpdate">
+                </div>
             </div>
             <div v-if="isBlocked" class="block-overlay">
                 Столбец заблокирован
